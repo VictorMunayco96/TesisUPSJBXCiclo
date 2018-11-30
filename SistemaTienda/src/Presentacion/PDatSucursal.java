@@ -6,6 +6,14 @@
 
 package Presentacion;
 
+import Helper.Validaciones;
+import Negocio.NDatSucursal2;
+import Validate.Validate;
+import ZMensajes.Save;
+import ZMensajes.Error;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+
 /**
  *
  * @author VictorHugo
@@ -15,7 +23,93 @@ public class PDatSucursal extends javax.swing.JFrame {
     /** Creates new form PDatSucursal */
     public PDatSucursal() {
         initComponents();
+         GetTabla("A");
+         TxtIdSucursal.setVisible(false);
     }
+    
+    
+    //MENSAJE
+
+    public void MensajeConfirm(String Mensaje) {
+        Save Obj = new Save();
+        Obj.setVisible(true);
+        Obj.setLocationRelativeTo(null);
+        ZMensajes.Save.LblSaveMensaje.setText(Mensaje);
+    }
+
+ 
+
+    public void MensajeError(String Mensaje) {
+
+         Error Obj = new Error();
+        Obj.setVisible(true);
+        Obj.setLocationRelativeTo(null);
+        ZMensajes.Error.LblErrorMensaje.setText(Mensaje);
+    }  
+      // FIN
+    
+    
+     //VARIABLES GLOBALES
+   
+        NDatSucursal2 Sucursal2 = new NDatSucursal2();
+    String Accion = "I";
+    
+    
+      //FIN
+    
+    
+        //METODOS
+    public void Nuevo() {
+      TxtIdSucursal.setText("");
+      TxtUbicacion.setText("");
+      TxtTelefono.setText("");
+      
+      Accion = "I";
+      
+    }
+
+
+    public void OcultarColumna(JTable Tabla, int Columna) {
+        Tabla.getColumn(Tabla.getColumnName(Columna)).setWidth(0);
+        Tabla.getColumn(Tabla.getColumnName(Columna)).setMinWidth(0);
+        Tabla.getColumn(Tabla.getColumnName(Columna)).setMaxWidth(0);
+    }
+
+    public void GetTabla(String Accion) {
+
+        try {
+
+            TblSucursal.setModel(Sucursal2.NGetDatSucursal( Accion)); 
+           
+            OcultarColumna(TblSucursal, 0);
+             
+            
+        } catch (Exception e) {
+            
+            MensajeError(String.valueOf(e));
+            System.out.println(e);
+        }
+    }
+    
+    //VALIDAR DATOS
+    private boolean ValidaDatos(){
+        
+        if(TxtTelefono.getText().trim().length() == 0){
+            MensajeError("INGRESE UBICACION");
+            return false;
+        }
+        else if(TxtTelefono.getText().trim().length() == 0){
+            MensajeError("INGRESE TELEFONO");
+            return false;
+        }
+       
+      return true;
+    }
+    
+    //FIN
+    
+    
+    
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -26,31 +120,31 @@ public class PDatSucursal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TblUsuarioEscritorio = new javax.swing.JTable();
+        TblSucursal = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        TxtDni = new javax.swing.JTextField();
+        TxtUbicacion = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        TxtUsuario = new javax.swing.JTextField();
+        TxtTelefono = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jButton4 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
-        TxtIdUsuarioEscritorio = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        TblPesona = new javax.swing.JTable();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        TxtIdSucursal = new javax.swing.JTextField();
+        RdbActivo = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        TxtEstado = new javax.swing.JComboBox<>();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,8 +156,8 @@ public class PDatSucursal extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        TblUsuarioEscritorio.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        TblUsuarioEscritorio.setModel(new javax.swing.table.DefaultTableModel(
+        TblSucursal.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        TblSucursal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -74,14 +168,14 @@ public class PDatSucursal extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        TblUsuarioEscritorio.setRowHeight(35);
-        TblUsuarioEscritorio.setRowMargin(0);
-        TblUsuarioEscritorio.addMouseListener(new java.awt.event.MouseAdapter() {
+        TblSucursal.setRowHeight(35);
+        TblSucursal.setRowMargin(0);
+        TblSucursal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                TblUsuarioEscritorioMousePressed(evt);
+                TblSucursalMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(TblUsuarioEscritorio);
+        jScrollPane1.setViewportView(TblSucursal);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -142,10 +236,15 @@ public class PDatSucursal extends javax.swing.JFrame {
             }
         });
 
-        TxtDni.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        TxtDni.addActionListener(new java.awt.event.ActionListener() {
+        TxtUbicacion.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        TxtUbicacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtDniActionPerformed(evt);
+                TxtUbicacionActionPerformed(evt);
+            }
+        });
+        TxtUbicacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtUbicacionKeyTyped(evt);
             }
         });
 
@@ -155,10 +254,15 @@ public class PDatSucursal extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel6.setText("TELEFONO");
 
-        TxtUsuario.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        TxtUsuario.addActionListener(new java.awt.event.ActionListener() {
+        TxtTelefono.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        TxtTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtUsuarioActionPerformed(evt);
+                TxtTelefonoActionPerformed(evt);
+            }
+        });
+        TxtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtTelefonoKeyTyped(evt);
             }
         });
 
@@ -187,36 +291,36 @@ public class PDatSucursal extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel16.setText("ESTADO");
 
-        TxtIdUsuarioEscritorio.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        TxtIdUsuarioEscritorio.addActionListener(new java.awt.event.ActionListener() {
+        TxtIdSucursal.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        TxtIdSucursal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtIdUsuarioEscritorioActionPerformed(evt);
+                TxtIdSucursalActionPerformed(evt);
             }
         });
 
-        TblPesona.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(TblPesona);
-
-        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jRadioButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jRadioButton1.setText("ACTIVOS");
+        RdbActivo.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(RdbActivo);
+        RdbActivo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        RdbActivo.setText("ACTIVOS");
 
         jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(jRadioButton2);
         jRadioButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jRadioButton2.setText("TODOS");
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "I" }));
+        TxtEstado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        TxtEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "I" }));
+
+        jButton5.setBackground(new java.awt.Color(102, 102, 102));
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AImagenes/Eliminar -32.png"))); // NOI18N
+        jButton5.setBorderPainted(false);
+        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton5.setFocusPainted(false);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -231,27 +335,23 @@ public class PDatSucursal extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(TxtIdUsuarioEscritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TxtIdSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(jSeparator1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TxtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(TxtUbicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(78, 78, 78)
                                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(TxtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(TxtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -260,12 +360,14 @@ public class PDatSucursal extends javax.swing.JFrame {
                 .addGap(38, 38, 38))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButton1)
+                .addComponent(RdbActivo)
                 .addGap(30, 30, 30)
                 .addComponent(jRadioButton2)
                 .addGap(70, 70, 70)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(366, 366, 366))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(302, 302, 302))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,21 +377,20 @@ public class PDatSucursal extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TxtIdUsuarioEscritorio, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtIdSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
+                        .addGap(22, 22, 22)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TxtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TxtUbicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(TxtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(TxtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -297,11 +398,12 @@ public class PDatSucursal extends javax.swing.JFrame {
                 .addGap(18, 21, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(RdbActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
@@ -336,37 +438,131 @@ public class PDatSucursal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TblUsuarioEscritorioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblUsuarioEscritorioMousePressed
-
-    }//GEN-LAST:event_TblUsuarioEscritorioMousePressed
+    private void TblSucursalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblSucursalMousePressed
+try {
+              if (evt.getClickCount() == 2) {
+            Accion = "U";
+            int fila = TblSucursal.getSelectedRow();
+            
+            TxtIdSucursal.setText(TblSucursal.getValueAt(fila, 0).toString());
+            TxtUbicacion.setText(TblSucursal.getValueAt(fila, 1).toString());
+            TxtTelefono.setText(TblSucursal.getValueAt(fila, 2).toString());
+            TxtEstado.setSelectedItem(TblSucursal.getValueAt(fila, 3).toString());
+           
+        }
+        } catch (Exception e) {
+            MensajeError("NO SE PUEDE EDITAR");
+            System.out.println(e);
+        }       
+    }//GEN-LAST:event_TblSucursalMousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+if (ValidaDatos()){
+       if (Accion.equals("I")) {
+      
 
+               
+                    try {
+                       Sucursal2.NSetDatSucursal(0,
+                               Validate.Text(TxtUbicacion.getText()) , 
+                               Validate.Number(TxtTelefono.getText()),
+                               Validate.Text(TxtEstado.getSelectedItem().toString()),
+                               Accion);
+                                
+                              
+                        GetTabla("A");
+
+                        MensajeConfirm("REGISTRO GUARDADO");
+                        Nuevo();
+                    } catch (Exception e) {
+                        MensajeError(String.valueOf(e));
+                        
+                    }
+
+             
+            
+        } else  {
+
+            
+                try {
+                    //MODIFICAR
+                   Sucursal2.NSetDatSucursal(Validate.Number(TxtIdSucursal.getText()),
+                               Validate.Text(TxtUbicacion.getText()) , 
+                               Validate.Number(TxtTelefono.getText()),
+                               Validate.Text(TxtEstado.getSelectedItem().toString()),
+                               Accion);
+                                
+                              
+                        GetTabla("A");
+
+                        MensajeConfirm("REGISTRO GUARDADO");
+                        Nuevo();
+                } catch (Exception e) {
+                    MensajeError(String.valueOf(e));
+                
+            }
+       }
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void TxtDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDniActionPerformed
+    private void TxtUbicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtUbicacionActionPerformed
 
-    }//GEN-LAST:event_TxtDniActionPerformed
+    }//GEN-LAST:event_TxtUbicacionActionPerformed
 
-    private void TxtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtUsuarioActionPerformed
+    private void TxtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtTelefonoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtUsuarioActionPerformed
+    }//GEN-LAST:event_TxtTelefonoActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
+        if (RdbActivo.isSelected()) {
+            GetTabla("A");
+        }else{GetTabla("T");}
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-         // TODO add your handling code here:
+Nuevo();         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void TxtIdUsuarioEscritorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtIdUsuarioEscritorioActionPerformed
+    private void TxtIdSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtIdSucursalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtIdUsuarioEscritorioActionPerformed
+    }//GEN-LAST:event_TxtIdSucursalActionPerformed
+
+    private void TxtUbicacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtUbicacionKeyTyped
+         // TODO add your handling code here:
+    }//GEN-LAST:event_TxtUbicacionKeyTyped
+
+    private void TxtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtTelefonoKeyTyped
+ if(TxtTelefono.getText().trim().length() > 8){
+            evt.consume(); 
+        }
+        char c=evt.getKeyChar(); 
+        if(Character.isLetter(c) ||c == ';' || c == '.' || c == ',') { 
+            getToolkit().beep(); 
+            evt.consume();      
+        }           // TODO add your handling code here:
+    }//GEN-LAST:event_TxtTelefonoKeyTyped
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+       try {
+            int confirmacion = JOptionPane.showConfirmDialog(rootPane, "¿ESTAS SEGURO DE ELIMINAR REGISTRO?", "MENSAJE", 2);
+            if (confirmacion == 0) {
+
+                int fila = TblSucursal.getSelectedRow();
+
+                Sucursal2.NSetDatSucursal(Validate.Number(TblSucursal.getValueAt(fila, 0).toString()),     "" ,        0,        "",                   "D");
+          GetTabla("A");
+                MensajeConfirm("REGISTRO ELIMINADO");
+                Nuevo();
+            }
+        } catch (Exception e) {
+            MensajeError(String.valueOf(e));
+            
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -404,16 +600,18 @@ public class PDatSucursal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TblPesona;
-    private javax.swing.JTable TblUsuarioEscritorio;
-    private javax.swing.JTextField TxtDni;
-    public static javax.swing.JTextField TxtIdUsuarioEscritorio;
-    private javax.swing.JTextField TxtUsuario;
+    private javax.swing.JRadioButton RdbActivo;
+    private javax.swing.JTable TblSucursal;
+    private javax.swing.JComboBox<String> TxtEstado;
+    public static javax.swing.JTextField TxtIdSucursal;
+    private javax.swing.JTextField TxtTelefono;
+    private javax.swing.JTextField TxtUbicacion;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel3;
@@ -422,10 +620,8 @@ public class PDatSucursal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;

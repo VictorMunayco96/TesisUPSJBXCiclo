@@ -174,6 +174,11 @@ public class PUsuPersonaJuridica extends javax.swing.JFrame {
                 TblPersonaJuridicaMousePressed(evt);
             }
         });
+        TblPersonaJuridica.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TblPersonaJuridicaKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(TblPersonaJuridica);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -521,6 +526,10 @@ try {
     private void TxtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDireccionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtDireccionActionPerformed
+
+    private void TblPersonaJuridicaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TblPersonaJuridicaKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TblPersonaJuridicaKeyTyped
 
     /**
      * @param args the command line arguments
