@@ -5,7 +5,8 @@
  */
 package sistematienda;
 
-import Presentacion.PInicio;
+
+import Presentacion.PLogin;
 
 /**
  *
@@ -17,9 +18,10 @@ public class SistemaTienda {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-      PInicio Obj = new PInicio();
-      Obj.setVisible(true);
-      Obj.setExtendedState(Obj.MAXIMIZED_BOTH);
+        PLogin Obj = new PLogin();
+       Obj.setVisible(true);
+      Obj.setLocationRelativeTo(null);
+     
     }
     
 }

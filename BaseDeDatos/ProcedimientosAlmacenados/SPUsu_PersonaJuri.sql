@@ -41,7 +41,7 @@ BEGIN
 
  if _Opcion='L' then
 
-Select * from usu_personajuri where Ruc=_Ruc;
+Select * from usu_personajuri where Ruc like concat('%',_Ruc,'%');
 
    End IF;
 

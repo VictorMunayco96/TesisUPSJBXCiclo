@@ -84,8 +84,6 @@ public class PLogin extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AImagenes/Docassion_5.png"))); // NOI18N
         jLabel2.setText("jLabel2");
 
-        jpfContraseña.setText("jPasswordField1");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -166,10 +164,11 @@ public class PLogin extends javax.swing.JFrame {
            cst.execute();
            ResultSet rs = cst.getResultSet();
            while (rs.next()) {  
-               System.out.println(rs.getString(3) + " " + rs.getString(2));
+               System.out.println(rs.getString(3) + " " + rs.getString(4));
                 if(rs.getString(3).toString().equals(TxtUsuario.getText()) && rs.getString(4).toString().equals(jpfContraseña.getText())){
                      this.setVisible(false);
                     new PInicio().show();
+                    
                     return;
                 }
             } 
