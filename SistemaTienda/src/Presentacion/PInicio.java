@@ -42,7 +42,8 @@ public class PInicio extends javax.swing.JFrame {
         Lbltexto = new javax.swing.JLabel();
         LblUsuarioInicio = new javax.swing.JLabel();
         LblTipoUsuarioInicio = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        LblIdSucursalInicio = new javax.swing.JLabel();
+        LblIdUsuarioInicio1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -127,7 +128,9 @@ public class PInicio extends javax.swing.JFrame {
         Lbltexto.setForeground(new java.awt.Color(102, 102, 102));
         Lbltexto.setText("VENTA DE ARTICULOS Y ACCESORIOS PARA EL HOGAR");
 
-        jLabel3.setText("jLabel3");
+        LblIdSucursalInicio.setText("1");
+
+        LblIdUsuarioInicio1.setText("1");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -143,7 +146,10 @@ public class PInicio extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LblTipoUsuarioInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(LblUsuarioInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(LblIdSucursalInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(LblIdUsuarioInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -156,7 +162,9 @@ public class PInicio extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(LblTipoUsuarioInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LblIdSucursalInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblIdUsuarioInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
@@ -378,6 +386,8 @@ Obj.setLocationRelativeTo(null);// TODO add your handling code here:
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnUsuario;
     private javax.swing.JButton BtnUsuario1;
+    private javax.swing.JLabel LblIdSucursalInicio;
+    private javax.swing.JLabel LblIdUsuarioInicio1;
     public static javax.swing.JLabel LblTipoUsuarioInicio;
     public static javax.swing.JLabel LblUsuarioInicio;
     public static javax.swing.JLabel Lbltexto;
@@ -386,7 +396,6 @@ Obj.setLocationRelativeTo(null);// TODO add your handling code here:
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
