@@ -6,9 +6,12 @@
 package Presentacion;
 
 
+import Helper.Validaciones;
+import Negocio.NUsuPersonaJuri;
 import Validate.Validate;
 
 import ZMensajes.Save;
+import ZMensajes.Error;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -23,39 +26,34 @@ public class PUsuPersonaJuridica extends javax.swing.JFrame {
      */
     public PUsuPersonaJuridica() {
         initComponents();
-        GetUsuarioEscritorio("T");
-        TblPesona.setVisible(false);
-        TxtIdUsuarioEscritorio.setVisible(false);
-        jScrollPane2.setVisible(false);
+        GetTabla("","L");
+     
     }
 //MENSAJE
-    public void MensajeSaved() {
 
+    public void MensajeConfirm(String Mensaje) {
         Save Obj = new Save();
         Obj.setVisible(true);
         Obj.setLocationRelativeTo(null);
+        ZMensajes.Save.LblSaveMensaje.setText(Mensaje);
     }
 
-    public void MensajeModified() {
+ 
 
-      
-    }
+    public void MensajeError(String Mensaje) {
 
-    public void MensajeDelete() {
-
-       
+         Error Obj = new Error();
+        Obj.setVisible(true);
+        Obj.setLocationRelativeTo(null);
+        ZMensajes.Error.LblErrorMensaje.setText(Mensaje);
     }  
-    public void MensajeError() {
-
-       
-
-    }
-    // FIN
+      // FIN
     
     
      //VARIABLES GLOBALES
    
-       
+        NUsuPersonaJuri PersonaJuri = new NUsuPersonaJuri();
+    String Accion = "I";
     
     
       //FIN
@@ -63,10 +61,12 @@ public class PUsuPersonaJuridica extends javax.swing.JFrame {
     
         //METODOS
     public void Nuevo() {
-        TxtIdUsuarioEscritorio.setText("");
-TxtDni.setText("");
-
-
+      TxtRuc.setText("");
+      TxtDescripcion.setText("");
+      TxtDireccion.setText("");
+      
+      Accion = "I";
+      
     }
 
 
@@ -76,26 +76,41 @@ TxtDni.setText("");
         Tabla.getColumn(Tabla.getColumnName(Columna)).setMaxWidth(0);
     }
 
-    public void GetUsuarioEscritorio(String Accion) {
+    public void GetTabla(String Texto, String Accion) {
 
         try {
 
-            
+            TblPersonaJuridica.setModel(PersonaJuri.NGetUsuPersonaJuri(Validate.Text(Texto), Accion)); 
            
-           
-          OcultarColumna(TblUsuarioEscritorio, 0);
-           OcultarColumna(TblUsuarioEscritorio, 1);
-            OcultarColumna(TblUsuarioEscritorio, 3);
+          
              
             
         } catch (Exception e) {
             
-            MensajeError();
+            MensajeError(String.valueOf(e));
             System.out.println(e);
         }
     }
     
+    //VALIDAR DATOS
+    private boolean ValidaDatos(){
+        
+        if(Validaciones.tryParse(TxtRuc.getText()) == 0){
+            MensajeError("INGRESE Nº DE RUC");
+            return false;
+        }
+        else if(TxtDescripcion.getText().trim().length() == 0){
+            MensajeError("INGRESE DESCRIPCION");
+            return false;
+        }
+        else if(TxtDireccion.getText().trim().length() == 0){
+            MensajeError("INGRESE DIRECCION");
+            return false;
+        }
+      return true;
+    }
     
+    //FIN
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -111,24 +126,24 @@ TxtDni.setText("");
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TblUsuarioEscritorio = new javax.swing.JTable();
+        TblPersonaJuridica = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        TxtDni = new javax.swing.JTextField();
+        TxtRuc = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        TxtUsuario = new javax.swing.JTextField();
+        TxtDescripcion = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
-        TxtBusqueda = new javax.swing.JTextField();
+        TxtRucBusqueda = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
-        TxtContraseña1 = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
+        TxtDireccion = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -140,8 +155,8 @@ TxtDni.setText("");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        TblUsuarioEscritorio.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        TblUsuarioEscritorio.setModel(new javax.swing.table.DefaultTableModel(
+        TblPersonaJuridica.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        TblPersonaJuridica.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -152,14 +167,14 @@ TxtDni.setText("");
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        TblUsuarioEscritorio.setRowHeight(35);
-        TblUsuarioEscritorio.setRowMargin(0);
-        TblUsuarioEscritorio.addMouseListener(new java.awt.event.MouseAdapter() {
+        TblPersonaJuridica.setRowHeight(35);
+        TblPersonaJuridica.setRowMargin(0);
+        TblPersonaJuridica.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                TblUsuarioEscritorioMousePressed(evt);
+                TblPersonaJuridicaMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(TblUsuarioEscritorio);
+        jScrollPane1.setViewportView(TblPersonaJuridica);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -220,10 +235,15 @@ TxtDni.setText("");
             }
         });
 
-        TxtDni.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        TxtDni.addActionListener(new java.awt.event.ActionListener() {
+        TxtRuc.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        TxtRuc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtDniActionPerformed(evt);
+                TxtRucActionPerformed(evt);
+            }
+        });
+        TxtRuc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtRucKeyTyped(evt);
             }
         });
 
@@ -233,22 +253,22 @@ TxtDni.setText("");
         jLabel6.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel6.setText("DESCRIPCION");
 
-        TxtUsuario.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        TxtUsuario.addActionListener(new java.awt.event.ActionListener() {
+        TxtDescripcion.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        TxtDescripcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtUsuarioActionPerformed(evt);
+                TxtDescripcionActionPerformed(evt);
             }
         });
 
-        TxtBusqueda.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        TxtBusqueda.addMouseListener(new java.awt.event.MouseAdapter() {
+        TxtRucBusqueda.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        TxtRucBusqueda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                TxtBusquedaMousePressed(evt);
+                TxtRucBusquedaMousePressed(evt);
             }
         });
-        TxtBusqueda.addActionListener(new java.awt.event.ActionListener() {
+        TxtRucBusqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtBusquedaActionPerformed(evt);
+                TxtRucBusquedaActionPerformed(evt);
             }
         });
 
@@ -280,6 +300,13 @@ TxtDni.setText("");
         jLabel5.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel5.setText("RUC");
 
+        TxtDireccion.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        TxtDireccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtDireccionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -300,26 +327,26 @@ TxtDni.setText("");
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TxtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(TxtRuc, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(TxtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(45, 45, 45)
                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(TxtContraseña1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TxtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jSeparator2))
                 .addGap(38, 38, 38))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(386, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(TxtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TxtRucBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(314, 314, 314))
@@ -332,17 +359,17 @@ TxtDni.setText("");
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                        .addComponent(TxtContraseña1, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TxtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(TxtRuc, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(TxtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -354,7 +381,7 @@ TxtDni.setText("");
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TxtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtRucBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(10, 10, 10)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
@@ -394,29 +421,67 @@ TxtDni.setText("");
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    
+        GetTabla(TxtRucBusqueda.getText().toUpperCase(), "L");
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void TxtBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtBusquedaActionPerformed
-  
-    }//GEN-LAST:event_TxtBusquedaActionPerformed
+    private void TxtRucBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtRucBusquedaActionPerformed
+ GetTabla(TxtRucBusqueda.getText().toUpperCase(), "L");  
+    }//GEN-LAST:event_TxtRucBusquedaActionPerformed
 
-    private void TxtBusquedaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TxtBusquedaMousePressed
+    private void TxtRucBusquedaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TxtRucBusquedaMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtBusquedaMousePressed
+    }//GEN-LAST:event_TxtRucBusquedaMousePressed
 
-    private void TxtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtUsuarioActionPerformed
+    private void TxtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDescripcionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtUsuarioActionPerformed
+    }//GEN-LAST:event_TxtDescripcionActionPerformed
 
-    private void TxtDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDniActionPerformed
+    private void TxtRucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtRucActionPerformed
        
         
-    }//GEN-LAST:event_TxtDniActionPerformed
+    }//GEN-LAST:event_TxtRucActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+  
+       if (ValidaDatos()){
+       if (Accion.equals("I")) {
+      
 
+               
+                    try {
+                        PersonaJuri.NSetUsuPersonaJuri(Validate.Text(TxtRuc.getText()),Validate.Text(TxtDescripcion.getText()) , Validate.Text(TxtDireccion.getText()), Accion);
+                                
+                              
+                        GetTabla("","L");
+
+                        MensajeConfirm("REGISTRO GUARDADO");
+                        Nuevo();
+                    } catch (Exception e) {
+                        MensajeError(String.valueOf(e));
+                        
+                    }
+
+             
+            
+        } else  {
+
+            
+                try {
+                    //MODIFICAR
+                    PersonaJuri.NSetUsuPersonaJuri(Validate.Text(TxtRuc.getText()),Validate.Text(TxtDescripcion.getText()) , Validate.Text(TxtDireccion.getText()), Accion);
+                                
+                              
+                        GetTabla("","L");
+
+                        MensajeConfirm("REGISTRO GUARDADO");
+                        Nuevo();
+                } catch (Exception e) {
+                    MensajeError(String.valueOf(e));
+                
+            }
+       }
+        }
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -424,9 +489,38 @@ TxtDni.setText("");
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void TblUsuarioEscritorioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblUsuarioEscritorioMousePressed
-       
-    }//GEN-LAST:event_TblUsuarioEscritorioMousePressed
+    private void TblPersonaJuridicaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblPersonaJuridicaMousePressed
+try {
+              if (evt.getClickCount() == 2) {
+            Accion = "U";
+            int fila = TblPersonaJuridica.getSelectedRow();
+            
+            TxtRuc.setText(TblPersonaJuridica.getValueAt(fila, 0).toString());
+            TxtDescripcion.setText(TblPersonaJuridica.getValueAt(fila, 1).toString());
+            TxtDireccion.setText(TblPersonaJuridica.getValueAt(fila, 2).toString());
+            
+           
+        }
+        } catch (Exception e) {
+            MensajeError("NO SE PUEDE EDITAR");
+            System.out.println(e);
+        }       
+    }//GEN-LAST:event_TblPersonaJuridicaMousePressed
+
+    private void TxtRucKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtRucKeyTyped
+ if(TxtRuc.getText().trim().length() > 11){
+            evt.consume(); 
+        }
+        char c=evt.getKeyChar(); 
+        if(Character.isLetter(c) ||c == ';' || c == '.' || c == ',') { 
+            getToolkit().beep(); 
+            evt.consume();      
+        }         // TODO add your handling code here:
+    }//GEN-LAST:event_TxtRucKeyTyped
+
+    private void TxtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDireccionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtDireccionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -465,11 +559,11 @@ TxtDni.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TblUsuarioEscritorio;
-    private javax.swing.JTextField TxtBusqueda;
-    private javax.swing.JPasswordField TxtContraseña1;
-    private javax.swing.JTextField TxtDni;
-    private javax.swing.JTextField TxtUsuario;
+    private javax.swing.JTable TblPersonaJuridica;
+    private javax.swing.JTextField TxtDescripcion;
+    private javax.swing.JTextField TxtDireccion;
+    private javax.swing.JTextField TxtRuc;
+    private javax.swing.JTextField TxtRucBusqueda;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

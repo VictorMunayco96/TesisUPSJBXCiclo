@@ -62,7 +62,7 @@ public class Conexion2 {
           Connection cn = null;
           
                  try {
-                     Class.forName("com.mysql.jdbc.Driver");
+                     Class.forName("com.mysql.cj.jdbc.Driver");
        
         cn = DriverManager.getConnection("jdbc:mysql://"+servidor+":"+puerto+"/"+baseDatos+"",user,password);
         
