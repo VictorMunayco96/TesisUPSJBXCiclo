@@ -4,10 +4,10 @@ DELIMITER $$
  CREATE PROCEDURE PA_Set_Neg_GastoInterno 
 (
 in _IdGastoInterno  int(11) ,
-in _Fecha datetime ,
+in _Fecha varchar(15),
 in _Asunto varchar(45) ,
 in _Descripcion varchar(150) ,
-in _MontoTotal decimal(7,2) ,
+in _MontoTotal decimal(7,2),
 in _IdSucursal  int(11) ,
 in _IdUsuario  int(11) ,
 
@@ -45,8 +45,8 @@ Delete from neg_gastointerno where IdGastoInterno =_IdGastoInterno ;
 
 DELIMITER $$
  CREATE PROCEDURE PA_Get_Neg_GastoInterno  (
- in _Fecha date,
- in _Fecha2 date,
+ in _Fecha varchar(15),
+ in _Fecha2 varchar(15),
  in _IdSucursal  int(11) ,
  in _Opcion varchar(45)
  )

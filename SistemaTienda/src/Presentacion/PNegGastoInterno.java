@@ -5,10 +5,13 @@
  */
 package Presentacion;
 
-/**
- *
- * @author VictorHugo
- */
+import Negocio.NNegGastoInterno;
+import Validate.Validate;
+import ZMensajes.Save;
+import ZMensajes.Error;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+
 public class PNegGastoInterno extends javax.swing.JFrame {
 
     /**
@@ -16,8 +19,104 @@ public class PNegGastoInterno extends javax.swing.JFrame {
      */
     public PNegGastoInterno() {
         initComponents();
+        GetTabla("D");
+        TxtIdGastoInterno.setVisible(false);
     }
 
+    
+    
+     
+    //MENSAJE
+
+    public void MensajeConfirm(String Mensaje) {
+        Save Obj = new Save();
+        Obj.setVisible(true);
+        Obj.setLocationRelativeTo(null);
+        ZMensajes.Save.LblSaveMensaje.setText(Mensaje);
+    }
+
+ 
+
+    public void MensajeError(String Mensaje) {
+
+         Error Obj = new Error();
+        Obj.setVisible(true);
+        Obj.setLocationRelativeTo(null);
+        ZMensajes.Error.LblErrorMensaje.setText(Mensaje);
+    }  
+      // FIN
+    
+    
+     //VARIABLES GLOBALES
+   
+        NNegGastoInterno GastosInternos = new NNegGastoInterno();
+    String Accion = "I";
+    
+    
+      //FIN
+    
+    
+        //METODOS
+    public void Nuevo() {
+      TxtIdGastoInterno.setText("");
+      TxtAsunto.setText("");
+   TxtDescripcion.setText("");
+      TxtMontoTotal.setText("");
+      
+      Accion = "I";
+      
+    }
+
+
+    public void OcultarColumna(JTable Tabla, int Columna) {
+        Tabla.getColumn(Tabla.getColumnName(Columna)).setWidth(0);
+        Tabla.getColumn(Tabla.getColumnName(Columna)).setMinWidth(0);
+        Tabla.getColumn(Tabla.getColumnName(Columna)).setMaxWidth(0);
+    }
+
+    public void GetTabla(String Accion) {
+
+        try {
+
+            TblGastosInternos.setModel(GastosInternos.NGetNegGastoInterno("","",Integer.parseInt(PInicio.LblIdSucursalInicio.getText()),Accion)); 
+           
+            OcultarColumna(TblGastosInternos, 0);
+             
+            
+        } catch (Exception e) {
+            
+            MensajeError(String.valueOf(e));
+            System.out.println(e);
+        }
+    }
+    
+    //VALIDAR DATOS
+    private boolean ValidaDatos(){
+        
+        if(TxtAsunto.getText().trim().length() == 0){
+            MensajeError("INGRESE UBICACION");
+            return false;
+        }
+        else if(TxtDescripcion.getText().trim().length() == 0){
+            MensajeError("INGRESE TELEFONO");
+            return false;
+        }
+          else if(TxtMontoTotal.getText().trim().length() == 0){
+              
+            MensajeError("INGRESE TELEFONO");
+            
+            return false;
+        }
+       
+      return true;
+    }
+    
+    //FIN
+    
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,24 +130,23 @@ public class PNegGastoInterno extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TblUsuarioEscritorio = new javax.swing.JTable();
+        TblGastosInternos = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        TxtDni = new javax.swing.JTextField();
+        TxtAsunto = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        TxtUsuario = new javax.swing.JTextField();
+        TxtDescripcion = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jButton6 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
-        TxtIdUsuarioEscritorio = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        TblPesona = new javax.swing.JTable();
-        TxtUsuario1 = new javax.swing.JTextField();
+        TxtIdGastoInterno = new javax.swing.JTextField();
+        TxtMontoTotal = new javax.swing.JTextField();
+        jButton7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,8 +158,8 @@ public class PNegGastoInterno extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        TblUsuarioEscritorio.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        TblUsuarioEscritorio.setModel(new javax.swing.table.DefaultTableModel(
+        TblGastosInternos.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        TblGastosInternos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -72,14 +170,14 @@ public class PNegGastoInterno extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        TblUsuarioEscritorio.setRowHeight(35);
-        TblUsuarioEscritorio.setRowMargin(0);
-        TblUsuarioEscritorio.addMouseListener(new java.awt.event.MouseAdapter() {
+        TblGastosInternos.setRowHeight(35);
+        TblGastosInternos.setRowMargin(0);
+        TblGastosInternos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                TblUsuarioEscritorioMousePressed(evt);
+                TblGastosInternosMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(TblUsuarioEscritorio);
+        jScrollPane1.setViewportView(TblGastosInternos);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -140,10 +238,10 @@ public class PNegGastoInterno extends javax.swing.JFrame {
             }
         });
 
-        TxtDni.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        TxtDni.addActionListener(new java.awt.event.ActionListener() {
+        TxtAsunto.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        TxtAsunto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtDniActionPerformed(evt);
+                TxtAsuntoActionPerformed(evt);
             }
         });
 
@@ -153,10 +251,10 @@ public class PNegGastoInterno extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel6.setText("DESCRIPCION");
 
-        TxtUsuario.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        TxtUsuario.addActionListener(new java.awt.event.ActionListener() {
+        TxtDescripcion.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        TxtDescripcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtUsuarioActionPerformed(evt);
+                TxtDescripcionActionPerformed(evt);
             }
         });
 
@@ -174,30 +272,33 @@ public class PNegGastoInterno extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel16.setText("MONTO TOTAL");
 
-        TxtIdUsuarioEscritorio.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        TxtIdUsuarioEscritorio.addActionListener(new java.awt.event.ActionListener() {
+        TxtIdGastoInterno.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        TxtIdGastoInterno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtIdUsuarioEscritorioActionPerformed(evt);
+                TxtIdGastoInternoActionPerformed(evt);
             }
         });
 
-        TblPesona.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(TblPesona);
-
-        TxtUsuario1.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        TxtUsuario1.addActionListener(new java.awt.event.ActionListener() {
+        TxtMontoTotal.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        TxtMontoTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtUsuario1ActionPerformed(evt);
+                TxtMontoTotalActionPerformed(evt);
+            }
+        });
+        TxtMontoTotal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtMontoTotalKeyTyped(evt);
+            }
+        });
+
+        jButton7.setBackground(new java.awt.Color(102, 102, 102));
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AImagenes/Eliminar -32.png"))); // NOI18N
+        jButton7.setBorderPainted(false);
+        jButton7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton7.setFocusPainted(false);
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
             }
         });
 
@@ -205,39 +306,38 @@ public class PNegGastoInterno extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(TxtIdUsuarioEscritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TxtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(78, 78, 78)
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TxtUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jSeparator2)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(TxtIdGastoInterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSeparator1))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TxtAsunto, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(78, 78, 78)
+                                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TxtMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jSeparator2)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TxtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(38, 38, 38))
         );
         jPanel2Layout.setVerticalGroup(
@@ -248,27 +348,28 @@ public class PNegGastoInterno extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TxtIdUsuarioEscritorio, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtIdGastoInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
+                        .addGap(22, 22, 22)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(TxtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(TxtAsunto, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(TxtUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(TxtMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(TxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(TxtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 27, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19))
         );
 
@@ -301,37 +402,135 @@ public class PNegGastoInterno extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TblUsuarioEscritorioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblUsuarioEscritorioMousePressed
-
-    }//GEN-LAST:event_TblUsuarioEscritorioMousePressed
+    private void TblGastosInternosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblGastosInternosMousePressed
+try {
+              if (evt.getClickCount() == 2) {
+            Accion = "U";
+            int fila = TblGastosInternos.getSelectedRow();
+            
+            TxtIdGastoInterno.setText(TblGastosInternos.getValueAt(fila, 0).toString());
+            TxtAsunto.setText(TblGastosInternos.getValueAt(fila, 2).toString());
+            TxtDescripcion.setText(TblGastosInternos.getValueAt(fila, 3).toString());
+            TxtMontoTotal.setText(TblGastosInternos.getValueAt(fila, 4).toString());
+           
+        }
+        } catch (Exception e) {
+            MensajeError("NO SE PUEDE EDITAR");
+            System.out.println(e);
+        }       
+    }//GEN-LAST:event_TblGastosInternosMousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+if (ValidaDatos()){
+       if (Accion.equals("I")) {
+      
 
+               
+                    try {
+                      GastosInternos.NSetNegGastoInterno(0,"",
+                              Validate.Text(TxtAsunto.getText()),
+                              Validate.Text(TxtDescripcion.getText()),
+                              Double.parseDouble(TxtMontoTotal.getText()),
+                              Integer.parseInt(PInicio.LblIdSucursalInicio.getText()),
+                              Integer.parseInt(PInicio.LblIdUsuarioInicio.getText()),
+                              Accion);
+                                
+                              
+                        GetTabla("D");
+
+                        MensajeConfirm("REGISTRO GUARDADO");
+                        Nuevo();
+                    } catch (Exception e) {
+                        MensajeError(String.valueOf(e));
+                        
+                    }
+
+             
+            
+        } else  {
+
+            
+                try {
+                    //MODIFICAR
+                    GastosInternos.NSetNegGastoInterno(Validate.Number(TxtIdGastoInterno.getText()),"",
+                              Validate.Text(TxtAsunto.getText()),
+                              Validate.Text(TxtDescripcion.getText()),
+                              Double.parseDouble(TxtMontoTotal.getText()),
+                              Integer.parseInt(PInicio.LblIdSucursalInicio.getText()),
+                              Integer.parseInt(PInicio.LblIdUsuarioInicio.getText()),
+                              Accion);
+                                
+                              
+                        GetTabla("D");
+
+                        MensajeConfirm("REGISTRO MODIFICADO");
+                        Nuevo();
+                } catch (Exception e) {
+                    MensajeError(String.valueOf(e));
+                
+            }
+       }
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void TxtDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDniActionPerformed
+    private void TxtAsuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtAsuntoActionPerformed
 
-    }//GEN-LAST:event_TxtDniActionPerformed
+    }//GEN-LAST:event_TxtAsuntoActionPerformed
 
-    private void TxtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtUsuarioActionPerformed
+    private void TxtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDescripcionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtUsuarioActionPerformed
+    }//GEN-LAST:event_TxtDescripcionActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-                // TODO add your handling code here:
+Nuevo();                // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void TxtIdUsuarioEscritorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtIdUsuarioEscritorioActionPerformed
+    private void TxtIdGastoInternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtIdGastoInternoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtIdUsuarioEscritorioActionPerformed
+    }//GEN-LAST:event_TxtIdGastoInternoActionPerformed
 
-    private void TxtUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtUsuario1ActionPerformed
+    private void TxtMontoTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtMontoTotalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtUsuario1ActionPerformed
+    }//GEN-LAST:event_TxtMontoTotalActionPerformed
+
+    private void TxtMontoTotalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtMontoTotalKeyTyped
+       if(TxtMontoTotal.getText().trim().length() > 8){
+            evt.consume(); 
+        }
+        char c=evt.getKeyChar(); 
+        if(Character.isLetter(c) ||c == ';' || c == ',') { 
+            getToolkit().beep(); 
+            evt.consume();      
+        }     
+    }//GEN-LAST:event_TxtMontoTotalKeyTyped
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+           try {
+            int confirmacion = JOptionPane.showConfirmDialog(rootPane, "¿ESTAS SEGURO DE ELIMINAR REGISTRO?", "MENSAJE", 2);
+            if (confirmacion == 0) {
+
+                int fila = TblGastosInternos.getSelectedRow();
+
+                GastosInternos.NSetNegGastoInterno(Validate.Number(TxtIdGastoInterno.getText()),"",
+                             "",
+                              "",
+                              0,
+                              0,
+                              0,
+                              "D");
+          GetTabla("D");
+                MensajeConfirm("REGISTRO ELIMINADO");
+                Nuevo();
+            }
+        } catch (Exception e) {
+            MensajeError(String.valueOf(e));
+            
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -369,15 +568,15 @@ public class PNegGastoInterno extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TblPesona;
-    private javax.swing.JTable TblUsuarioEscritorio;
-    private javax.swing.JTextField TxtDni;
-    public static javax.swing.JTextField TxtIdUsuarioEscritorio;
-    private javax.swing.JTextField TxtUsuario;
-    private javax.swing.JTextField TxtUsuario1;
+    private javax.swing.JTable TblGastosInternos;
+    private javax.swing.JTextField TxtAsunto;
+    private javax.swing.JTextField TxtDescripcion;
+    public static javax.swing.JTextField TxtIdGastoInterno;
+    private javax.swing.JTextField TxtMontoTotal;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel3;
@@ -387,7 +586,6 @@ public class PNegGastoInterno extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;

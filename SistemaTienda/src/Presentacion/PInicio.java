@@ -43,7 +43,7 @@ public class PInicio extends javax.swing.JFrame {
         LblUsuarioInicio = new javax.swing.JLabel();
         LblTipoUsuarioInicio = new javax.swing.JLabel();
         LblIdSucursalInicio = new javax.swing.JLabel();
-        LblIdUsuarioInicio1 = new javax.swing.JLabel();
+        LblIdUsuarioInicio = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -53,6 +53,8 @@ public class PInicio extends javax.swing.JFrame {
         BtnUsuario = new javax.swing.JButton();
         BtnUsuario1 = new javax.swing.JButton();
         BtnUsuario2 = new javax.swing.JButton();
+        BtnUsuario3 = new javax.swing.JButton();
+        BtnUsuario4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -131,7 +133,7 @@ public class PInicio extends javax.swing.JFrame {
 
         LblIdSucursalInicio.setText("1");
 
-        LblIdUsuarioInicio1.setText("1");
+        LblIdUsuarioInicio.setText("1");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -150,7 +152,7 @@ public class PInicio extends javax.swing.JFrame {
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(LblIdSucursalInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(LblIdUsuarioInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(LblIdUsuarioInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -165,7 +167,7 @@ public class PInicio extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LblIdSucursalInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LblIdUsuarioInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(LblIdUsuarioInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
@@ -261,23 +263,54 @@ public class PInicio extends javax.swing.JFrame {
             }
         });
 
+        BtnUsuario3.setBackground(new java.awt.Color(153, 153, 153));
+        BtnUsuario3.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        BtnUsuario3.setText("GASTOS INTERNOS");
+        BtnUsuario3.setBorder(null);
+        BtnUsuario3.setBorderPainted(false);
+        BtnUsuario3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnUsuario3.setFocusPainted(false);
+        BtnUsuario3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnUsuario3ActionPerformed(evt);
+            }
+        });
+
+        BtnUsuario4.setBackground(new java.awt.Color(153, 153, 153));
+        BtnUsuario4.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        BtnUsuario4.setText("GASTOS INTERNOS");
+        BtnUsuario4.setBorder(null);
+        BtnUsuario4.setBorderPainted(false);
+        BtnUsuario4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnUsuario4.setFocusPainted(false);
+        BtnUsuario4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnUsuario4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BtnUsuario4, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(BtnUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BtnUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(54, 54, 54)
-                .addComponent(BtnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(BtnUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BtnUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(55, 55, 55)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(54, 54, 54)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(BtnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BtnUsuario3, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(550, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -291,8 +324,11 @@ public class PInicio extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(235, Short.MAX_VALUE))
+                    .addComponent(BtnUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnUsuario3, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(BtnUsuario4, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("", jPanel6);
@@ -347,7 +383,9 @@ public class PInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MousePressed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      
+      PEmpleado Obj = new PEmpleado();
+Obj.setVisible(true);
+Obj.setLocationRelativeTo(null); 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -373,6 +411,18 @@ Obj.setLocationRelativeTo(null);// TODO add your handling code here:
 Obj.setVisible(true);
 Obj.setLocationRelativeTo(null);  // TODO add your handling code here:
     }//GEN-LAST:event_BtnUsuario2ActionPerformed
+
+    private void BtnUsuario3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUsuario3ActionPerformed
+        PNegGastoInterno Obj = new PNegGastoInterno();
+Obj.setVisible(true);
+Obj.setLocationRelativeTo(null);  // TODO add your handling code here:
+    }//GEN-LAST:event_BtnUsuario3ActionPerformed
+
+    private void BtnUsuario4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUsuario4ActionPerformed
+       PNegProducto Obj = new PNegProducto();
+Obj.setVisible(true);
+Obj.setLocationRelativeTo(null); 
+    }//GEN-LAST:event_BtnUsuario4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -414,8 +464,10 @@ Obj.setLocationRelativeTo(null);  // TODO add your handling code here:
     private javax.swing.JButton BtnUsuario;
     private javax.swing.JButton BtnUsuario1;
     private javax.swing.JButton BtnUsuario2;
-    private javax.swing.JLabel LblIdSucursalInicio;
-    private javax.swing.JLabel LblIdUsuarioInicio1;
+    private javax.swing.JButton BtnUsuario3;
+    private javax.swing.JButton BtnUsuario4;
+    public static javax.swing.JLabel LblIdSucursalInicio;
+    public static javax.swing.JLabel LblIdUsuarioInicio;
     public static javax.swing.JLabel LblTipoUsuarioInicio;
     public static javax.swing.JLabel LblUsuarioInicio;
     public static javax.swing.JLabel Lbltexto;

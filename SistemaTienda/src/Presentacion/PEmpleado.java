@@ -646,6 +646,7 @@ public class PEmpleado extends javax.swing.JFrame {
          BuscarSucursal instBusSucursal =  new BuscarSucursal();
          instBusSucursal.setAlwaysOnTop(true);
          instBusSucursal.setVisible(true);
+         instBusSucursal.setLocationRelativeTo(null);
      
     
     }//GEN-LAST:event_jButton9ActionPerformed
