@@ -59,6 +59,7 @@ DELIMITER $$
  
 
 in _IdSucursal int,
+in _IdVenta int,
  in _Opcion varchar(45)
  
  )
@@ -69,7 +70,7 @@ BEGIN
 
  if _Opcion='B' then
 
-select * from neg_Venta where IdVenta= _Venta and IdSucursal=_IdSucursal ;
+select * from neg_Venta where IdVenta= _IdVenta and IdSucursal=_IdSucursal ;
 
    End IF;
    

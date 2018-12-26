@@ -205,7 +205,7 @@ public class DNegVenta {
         DefaultTableModel modelo = null;
 
         String[] titulos = {"IdVenta","IdUsuario", "Fecha"," Hora"," IGV", "MontoTotal", "CuantoDio", "Vuelto", "TipoRecibo", "TipoPago", "IdSucursal", "Estado", "Ruc", "DNI"};
-        String[] registro = new String[7];
+        String[] registro = new String[14];
 
         modelo = new DefaultTableModel(null, titulos);
 
@@ -213,8 +213,8 @@ public class DNegVenta {
 
             CallableStatement proc = con.prepareCall(" CALL PA_Get_Neg_Venta(?,?,?)");
          
-        proc.setInt(1, Campo.getIdVenta());
-proc.setInt(2, Campo.getIdSucursal());
+        proc.setInt(2, Campo.getIdVenta());
+proc.setInt(1, Campo.getIdSucursal());
 proc.setString(3, Campo.getOpcion());
 
             proc.execute();

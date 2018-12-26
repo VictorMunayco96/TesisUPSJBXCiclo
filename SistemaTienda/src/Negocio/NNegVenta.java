@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 public class NNegVenta {
     
     
-    public String NSetNegStock( int IdVenta,    int IdUsuario,    double IGV,    double MontoTotal,    double CuantoDio,    double Vuelto,    String TipoRecibo,    String TipoPago,
+    public String NSetNegVenta( int IdVenta,    int IdUsuario,    double IGV,    double MontoTotal,    double CuantoDio,    double Vuelto,    String TipoRecibo,    String TipoPago,
     int IdSucursal,    String Estado,    String Ruc,    int DNI,    String Opcion) {
           
         DNegVenta Obj = new DNegVenta();
@@ -39,7 +39,7 @@ public class NNegVenta {
         return Obj.DSetNegVenta(Obj);
     }
 
-    public DefaultTableModel NGetNegStock( int IdVenta, int IdSucursal, String Opcion) {
+    public DefaultTableModel NGetNegVenta(int IdVenta, int IdSucursal, String Opcion) {
  DNegVenta Obj = new DNegVenta();
        
 

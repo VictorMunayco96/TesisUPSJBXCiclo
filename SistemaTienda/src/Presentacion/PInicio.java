@@ -19,6 +19,8 @@ public class PInicio extends javax.swing.JFrame {
     public PInicio() {
         initComponents();
          this.setExtendedState(this.MAXIMIZED_BOTH);
+         LblIdSucursalInicio.setVisible(false);
+         LblIdUsuarioInicio.setVisible(false);
         
     }
 
@@ -56,6 +58,8 @@ public class PInicio extends javax.swing.JFrame {
         BtnUsuario3 = new javax.swing.JButton();
         BtnUsuario4 = new javax.swing.JButton();
         BtnUsuario5 = new javax.swing.JButton();
+        BtnUsuario6 = new javax.swing.JButton();
+        BtnUsuario7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -303,6 +307,32 @@ public class PInicio extends javax.swing.JFrame {
             }
         });
 
+        BtnUsuario6.setBackground(new java.awt.Color(153, 153, 153));
+        BtnUsuario6.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        BtnUsuario6.setText("VENTA");
+        BtnUsuario6.setBorder(null);
+        BtnUsuario6.setBorderPainted(false);
+        BtnUsuario6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnUsuario6.setFocusPainted(false);
+        BtnUsuario6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnUsuario6ActionPerformed(evt);
+            }
+        });
+
+        BtnUsuario7.setBackground(new java.awt.Color(153, 153, 153));
+        BtnUsuario7.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        BtnUsuario7.setText("COMPRA");
+        BtnUsuario7.setBorder(null);
+        BtnUsuario7.setBorderPainted(false);
+        BtnUsuario7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnUsuario7.setFocusPainted(false);
+        BtnUsuario7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnUsuario7ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -314,20 +344,22 @@ public class PInicio extends javax.swing.JFrame {
                         .addComponent(BtnUsuario4, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BtnUsuario5, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel6Layout.createSequentialGroup()
-                            .addComponent(BtnUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BtnUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel6Layout.createSequentialGroup()
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(55, 55, 55)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(BtnUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BtnUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(54, 54, 54)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(BtnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnUsuario3, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(550, Short.MAX_VALUE))
+                    .addComponent(BtnUsuario3, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnUsuario6, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addComponent(BtnUsuario7, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(316, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -336,7 +368,8 @@ public class PInicio extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BtnUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnUsuario7, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -345,7 +378,8 @@ public class PInicio extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnUsuario4, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnUsuario5, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BtnUsuario5, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnUsuario6, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
 
@@ -448,6 +482,18 @@ Obj.setVisible(true);
 Obj.setLocationRelativeTo(null); 
     }//GEN-LAST:event_BtnUsuario5ActionPerformed
 
+    private void BtnUsuario6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUsuario6ActionPerformed
+          PNegVenta Obj = new PNegVenta();
+Obj.setVisible(true);
+Obj.setLocationRelativeTo(null); 
+    }//GEN-LAST:event_BtnUsuario6ActionPerformed
+
+    private void BtnUsuario7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUsuario7ActionPerformed
+        PNegCompra Obj = new PNegCompra();
+Obj.setVisible(true);
+Obj.setLocationRelativeTo(null); 
+    }//GEN-LAST:event_BtnUsuario7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -491,6 +537,8 @@ Obj.setLocationRelativeTo(null);
     private javax.swing.JButton BtnUsuario3;
     private javax.swing.JButton BtnUsuario4;
     private javax.swing.JButton BtnUsuario5;
+    private javax.swing.JButton BtnUsuario6;
+    private javax.swing.JButton BtnUsuario7;
     public static javax.swing.JLabel LblIdSucursalInicio;
     public static javax.swing.JLabel LblIdUsuarioInicio;
     public static javax.swing.JLabel LblTipoUsuarioInicio;
